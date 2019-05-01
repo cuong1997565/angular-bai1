@@ -1,0 +1,42 @@
+<div class="row">
+
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <label>Name : </label> <input type="text" class="form-control" [(ngModel)]="name" />
+    <label>Price : </label> <input type="number" class="form-control" [(ngModel)]="price" />
+    <button class="btn btn-primary" type="button"
+    [routerLink] = "['/products']"
+    [queryParams]="{name : name, price:price}"
+    [style.margin-right.px]="15"
+    >Sreach</button>
+
+    <button class="btn btn-danger" type="button"
+    [routerLink] = "['/products']"
+    (click)="onSreach()"
+    >Sreach</button>
+  </div>
+</div>
+
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products; let i = index" [routerLink]="['/product/',product.id]">
+      <td> {{ i+1 }} </td>
+      <td> {{product.name}} </td>
+      <td> {{product.price | currency : 'VND' : true}} </td>
+      <td> {{ product.status ? 'Active' : 'Deactive' }}  </td>
+      <td>
+        <a>Edit / </a>
+        <a> Delete </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
